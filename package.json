@@ -14,10 +14,11 @@
     "morgan": "1.6.x",
     "errorhandler": "1.4.x",
     "connect-multiparty": "2.0.x",
+    "cfenv": "1.0.x",
     "botmaster": "^2.1.0"
   },
   "repository": {},
   "engines": {
-  	"node": "4.x"
+    "node": "4.x"
   }
 }

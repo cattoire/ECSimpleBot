@@ -1,6 +1,12 @@
 const Botmaster = require('botmaster');
+const cfenv = require('cfenv');
+const express = require('express');
 
-const botmaster = new Botmaster();
+const appEnv = cfenv.getAppEnv();
+const bots = express();
+
+
+
 
 
 const MessengerBot = Botmaster.botTypes.MessengerBot;
@@ -15,9 +21,18 @@ const messengerSettings = {
   webhookEndpoint: '/webhook1234', // botmaster will mount this webhook on https://Your_Domain_Name/messenger/webhook1234
 };
 
-const messengerBot = new MessengerBot(messengerSettings);
+const botsSettings = [ {
+  messenger: messengerSettings
+}];
 
-botmaster.addBot(messengerBot);
+const botmasterSettings = {
+  botsSettings,
+  app: bots,
+    port: appEnv.isLocal ? 3000 : appEnv.port,
+};
+
+const botmaster = new Botmaster(botmasterSettings);
+
 
 botmaster.on('update', (bot, update) => {
   console.log(update, null, 2);
